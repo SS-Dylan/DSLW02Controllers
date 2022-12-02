@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-//builder.Services.AddSingleton<IWordService, WordService>(); //TODO: fix
+builder.Services.AddSingleton<IWordService, WordService>();
 
 var app = builder.Build();
 
@@ -25,6 +25,15 @@ app.UseAuthorization();
 
 app.MapControllerRoute(
     name: "default",
-    pattern: "{controller=Dictionary}/{action}/{word}/{meaning}");
+    pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "addwords",
+    pattern: "{controller=dictionary}/{action}/{word}/{meaning}");
+
+app.MapControllerRoute(
+    name: "bargraph",
+    pattern: "bargraph/{*values}",
+    defaults: new { Controller = "Home", action = "BarGraph" });
 
 app.Run();

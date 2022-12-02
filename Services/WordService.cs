@@ -5,11 +5,6 @@ namespace DSLW02Controllers.Services;
 public class WordService : IWordService
 {
     private static List<MyDictionaryEntry> _words = new List<MyDictionaryEntry>();
-    
-    public WordService(List<MyDictionaryEntry> words)
-    {
-        _words = words;
-    }
 
     public void AddWord(string word, string meaning)
     {

@@ -1,5 +1,6 @@
 ﻿using DSLW02Controllers.Services;
 using Microsoft.AspNetCore.Mvc;
+using System.Web;
 
 namespace DSLW02Controllers.Controllers;
 
@@ -14,8 +15,7 @@ public class DictionaryController : Controller
 
     public IActionResult Index()
     {
-        var dictionary = _dictionary.GetWords();
-        return View(dictionary);
+        return View(_dictionary.GetWords());
     }
 
     public IActionResult AddWord()
@@ -24,8 +24,11 @@ public class DictionaryController : Controller
     }
 
     [HttpGet]
-    public IActionResult AddNewWord()
+    public IActionResult AddNewWord(string word, string meaning)
     {
-        return View();
+        word = HttpUtility.HtmlEncode(word);
+        meaning = HttpUtility.HtmlEncode(meaning);
+        _dictionary.AddWord(word, meaning);
+        return RedirectToAction("Index");
     }
 }
