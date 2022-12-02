@@ -8,7 +8,7 @@ public class WordService : IWordService
 
     public void AddWord(string word, string meaning)
     {
-        MyDictionaryEntry dictionaryEntry = new() { Word = string.Empty, Meaning = string.Empty };
+        MyDictionaryEntry dictionaryEntry = new() { Word = word, Meaning = meaning };
         _words.Add(dictionaryEntry);
     }
 
